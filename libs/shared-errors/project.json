@@ -1,17 +1,17 @@
 {
   "name": "shared-errors",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "shared-errors/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-errors/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/shared-errors",
-        "main": "shared-errors/src/index.ts",
-        "tsConfig": "shared-errors/tsconfig.lib.json",
-        "assets": ["shared-errors/*.md"]
+        "outputPath": "dist/libs/shared-errors",
+        "main": "libs/shared-errors/src/index.ts",
+        "tsConfig": "libs/shared-errors/tsconfig.lib.json",
+        "assets": ["libs/shared-errors/*.md"]
       }
     },
     "lint": {
@@ -19,8 +19,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "shared-errors/**/*.ts",
-          "shared-errors/package.json"
+          "libs/shared-errors/**/*.ts",
+          "libs/shared-errors/package.json"
         ]
       }
     },
@@ -28,7 +28,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "shared-errors/jest.config.ts"
+        "jestConfig": "libs/shared-errors/jest.config.ts"
       }
     }
   },

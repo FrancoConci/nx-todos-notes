@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@demo/shared-errors": ["shared-errors/src/index.ts"]
+      "@demo/shared-errors": ["libs/shared-errors/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
