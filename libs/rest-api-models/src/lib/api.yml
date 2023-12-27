@@ -1,0 +1,27 @@
+openapi: 3.0.0
+servers:
+  - description: todo
+    url: 'http://localhost:3000/'
+info:
+  contact:
+    name: Franco
+    email: franco1conci@gmail.com
+    url: 'http://localhost:3000/'
+  version: 0.0.3
+  title: Todo api
+  description: |
+    ### Introduction
+      Endpoints specifications and data structures for Todo API\
+
+paths:
+  /auth/login:
+    $ref: './paths/auth/login.yml#/~1auth~1login'
+  /auth/signup:
+    $ref: './paths/auth/signup.yml#/~1auth~1signup'
+  /user/{id}:
+    $ref: './paths/user/user.yml#/~1user~1{id}'
+
+components:
+  schemas:
+    user:
+      $ref: './schemas/user/user.yml'

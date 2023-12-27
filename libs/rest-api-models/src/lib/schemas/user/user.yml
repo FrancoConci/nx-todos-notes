@@ -1,0 +1,14 @@
+user:
+  properties:
+    id:
+      type: string
+      description: user id
+    username:
+      type: string
+      description: user name
+    password:
+      type: string
+      description: password
+  required:
+    - id
+    - username

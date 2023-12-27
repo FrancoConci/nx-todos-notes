@@ -1,0 +1,11 @@
+loginRequest:
+  properties:
+    username:
+      type: string
+      description: user name
+    password:
+      type: string
+      description: password
+  required:
+    - username
+    - password

@@ -1,0 +1,11 @@
+errorResponse:
+  properties:
+    code:
+      type: string
+      description: unique identifier
+    message:
+      type: string
+      description: error message
+  required:
+    - code
+    - message

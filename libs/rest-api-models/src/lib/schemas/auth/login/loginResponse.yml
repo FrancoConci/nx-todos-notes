@@ -1,0 +1,7 @@
+loginResponse:
+  properties:
+    token:
+      type: string
+      description: auth token
+  required:
+    - token

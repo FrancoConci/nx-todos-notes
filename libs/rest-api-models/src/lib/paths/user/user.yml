@@ -1,0 +1,43 @@
+/user/{id}:
+  get:
+    tags:
+      - User
+    summary: User get by id
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          description: user id
+        required: true
+      - in: header
+        name: x-token
+        schema:
+          type: string
+          description: token
+    responses:
+      '200':
+        description: user get by id response
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '../../schemas/user/user.yml#/user'
+      '400':
+        description: error response
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/errorResponse.yml#/errorResponse'
+      '403':
+        description: error response
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/errorResponse.yml#/errorResponse'
+      '404':
+        description: error response
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/errorResponse.yml#/errorResponse'

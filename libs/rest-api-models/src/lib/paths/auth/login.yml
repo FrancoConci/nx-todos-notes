@@ -1,0 +1,24 @@
+/auth/login:
+  post:
+    tags:
+      - Auth
+    summary: User login
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/auth/login/loginRequest.yml#/loginRequest'
+    responses:
+      '200':
+        description: login response
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '../../schemas/auth/login/loginResponse.yml#/loginResponse'
+      '400':
+        description: error response
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/errorResponse.yml#/errorResponse'
