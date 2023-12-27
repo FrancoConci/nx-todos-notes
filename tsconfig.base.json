@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@demo/rest-api-models": ["libs/rest-api-models/src/index.ts"],
       "@demo/shared-errors": ["libs/shared-errors/src/index.ts"]
     }
   },
