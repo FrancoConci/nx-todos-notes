@@ -1,3 +1,4 @@
+import { fnOrThrowSync } from '../../fnOrThrow/fnOrThrowSync';
 import { BaseError } from '../base';
 
 export class AuthError extends BaseError {
@@ -9,3 +10,6 @@ export class AuthError extends BaseError {
     this.message = message;
   }
 }
+
+export const fnOrAuthError = <T>(fn: () => T): T | AuthError =>
+  fnOrThrowSync<T, AuthError>(fn, AuthError);

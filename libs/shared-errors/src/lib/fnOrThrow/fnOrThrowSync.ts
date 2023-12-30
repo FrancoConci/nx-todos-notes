@@ -1,11 +1,10 @@
 export const fnOrThrowSync = <returnValue, error>(
   callback: () => returnValue,
-  errorConstructor: new () => error
+  errorConstructor: new (err: any) => error
 ) => {
   try {
-    console.log('callback()', callback());
     return callback();
   } catch (err) {
-    return new errorConstructor();
+    return new errorConstructor(err);
   }
 };
