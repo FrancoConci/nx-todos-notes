@@ -1,3 +1,1 @@
-export function restApiModels(): string {
-  return 'rest-api-models';
-}
+export * from './index';
