@@ -52,7 +52,7 @@ describe.each([
     error: DerivedTestError,
   },
 ])('fnOrThrowSync', ({ spy, error }) => {
-  it('does not return error unnecessarily', () => {
+  it('throws if needed', () => {
     const value = fnOrThrowSync<string, TestError | DerivedTestError>(
       spy,
       error
