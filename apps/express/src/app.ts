@@ -1,7 +1,10 @@
 import cors from 'cors';
 import express from 'express';
-import { corsOptions } from './middleware/cors/corsMiddleWare';
 import { connect } from './database/utils/utils';
+import { corsOptions } from './middleware/cors/corsMiddleWare';
+import { serverError } from './middleware/errors/errors';
+import { authRouter } from './routes/auth/authRoutes';
+import { userRouter } from './routes/user/userRoutes';
 
 export const app = express();
 
@@ -13,3 +16,8 @@ app.use(cors(corsOptions));
 app.get('/', (req, res) => {
   res.send({ message: `Hello API` });
 });
+
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
+
+app.use(serverError);
