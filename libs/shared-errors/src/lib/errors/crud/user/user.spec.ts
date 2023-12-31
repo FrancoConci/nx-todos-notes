@@ -1,8 +1,10 @@
 import {
   fnOrUserCreateError,
   fnOrUserRetrieveError,
+  fnOrUserUpdateError,
   UserCreateError,
   UserRetrieveError,
+  UserUpdateError,
 } from './user';
 
 beforeEach(() => {
@@ -52,6 +54,30 @@ describe.each([
 ])('fnOrUserCreateError', ({ spy, error }) => {
   it('throws if needed', () => {
     const value = fnOrUserCreateError<string>(spy);
+    expect(value).toBeInstanceOf(error);
+  });
+});
+
+describe.each([
+  {
+    func: func,
+    error: UserUpdateError,
+  },
+])('fnOrUserUpdateError', ({ func: spy, error }) => {
+  it('does not return error unnecessarily', () => {
+    const value = fnOrUserUpdateError<string>(spy);
+    expect(value).toStrictEqual(expectedMessage);
+  });
+});
+
+describe.each([
+  {
+    spy: funcThatThrows,
+    error: UserUpdateError,
+  },
+])('fnOrUserUpdateError', ({ spy, error }) => {
+  it('throws if needed', () => {
+    const value = fnOrUserUpdateError<string>(spy);
     expect(value).toBeInstanceOf(error);
   });
 });

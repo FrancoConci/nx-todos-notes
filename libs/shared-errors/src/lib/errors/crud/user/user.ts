@@ -21,8 +21,21 @@ export class UserCreateError extends BaseError {
   }
 }
 
+export class UserUpdateError extends BaseError {
+  public override name = 'User_update_Error';
+  public scope = 'CRUD_User';
+  constructor(message: string) {
+    super(message);
+    Object.setPrototypeOf(this, UserUpdateError.prototype);
+    this.message = message;
+  }
+}
+
 export const fnOrUserRetrieveError = <T>(fn: () => T): T | UserRetrieveError =>
   fnOrThrowSync<T, UserRetrieveError>(fn, UserRetrieveError);
 
-export const fnOrUserCreateError = <T>(fn: () => T): T | UserRetrieveError =>
+export const fnOrUserCreateError = <T>(fn: () => T): T | UserCreateError =>
   fnOrThrowSync<T, UserCreateError>(fn, UserCreateError);
+
+export const fnOrUserUpdateError = <T>(fn: () => T): T | UserUpdateError =>
+  fnOrThrowSync<T, UserUpdateError>(fn, UserUpdateError);
