@@ -15,7 +15,10 @@ it('shows all slots with default value', () => {
   expect(main.exists()).toBe(true);
   expect(footer.exists()).toBe(true);
 
-  expect(container.element.childNodes.length).toBe(3);
+  expect(container.element.children.length).toBe(3);
+  expect(header.element.children.length).toBe(0);
+  expect(main.element.children.length).toBe(0);
+  expect(footer.element.children.length).toBe(0);
 
   expect(header.element.innerHTML).toBe('header');
   expect(main.element.innerHTML).toBe('content');
