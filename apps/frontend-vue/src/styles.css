@@ -30,12 +30,12 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --secondary-main: #393939;
-    --secondary-dark: #232323;
-    --secondary-light: #646464;
-    --contrast-light: #bbbbbb;
-    --primary-main: #64d6e7;
-    --primary-dark: #3dafc0;
+    --contrast: #393939;
+    --contrast-dark: #232323;
+    --primary-light: #646464;
+    --primary-main: #bbbbbb;
+    --secondary-main: #64d6e7;
+    --secondary-dark: #3dafc0;
     --alert-main: #d9de78;
     --danger-main: #e68d9e;
   }
@@ -47,9 +47,17 @@
 }
 
 body {
-  min-height: 100vmax;
+  min-height: 100vh;
+  margin: 0px;
   color: var(--contrast);
   background-color: var(--primary-main);
   line-height: 1.6;
   font-family: hubballi;
+}
+
+.centered {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 }
