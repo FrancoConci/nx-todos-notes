@@ -3,7 +3,7 @@
   <div data-testid="footer" :class="$style.footer"><slot>footer</slot></div>
 </template>
 <style module>
-@value centered from '../styling/base.css';
+@value centered from '../../styles.css';
 
 .footer {
   composes: centered;
