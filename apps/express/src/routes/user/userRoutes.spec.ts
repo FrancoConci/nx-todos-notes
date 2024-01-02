@@ -19,12 +19,10 @@ describe.each([
   },
 ])('/user/{id}', ({ expected }) => {
   test(`returns ${expected}`, async () => {
-    const token = jsonwebtoken.sign({ id: defaultUserId }, secret, {
-      expiresIn: 3600,
-    });
+    const token = jsonwebtoken.sign({ id: defaultUserId }, secret);
     const response = await request(app)
       .get(`/user/${defaultUserId}`)
-      .set('Authorization', token);
+      .set('Authorization', `Bearer ${token}`);
     expect(response.body).toEqual(expected);
   });
 });

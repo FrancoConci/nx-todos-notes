@@ -23,9 +23,7 @@ describe.each([
   test(`given ${id} and ${internalSecret}, returns ${JSON.stringify(
     expected
   )}`, async () => {
-    const token = jsonwebtoken.sign({ id }, internalSecret, {
-      expiresIn: 3600,
-    });
+    const token = jsonwebtoken.sign({ id }, internalSecret);
     const response = await request(app)
       .get(`/user/${id}`)
       .set('Authorization', `bearer ${token}`);
@@ -37,7 +35,10 @@ describe.each([
   {
     id: 'unknownid',
     secret: internalSecret,
-    expected: {},
+    expected: {
+      code: 'server-error',
+      message: 'server error',
+    },
   },
   {
     id: defaultUserId,
@@ -48,10 +49,10 @@ describe.each([
   test(`given ${id} and ${secret}, returns ${JSON.stringify(
     expected
   )}`, async () => {
-    const token = jsonwebtoken.sign({ id }, secret, { expiresIn: 3600 });
+    const token = jsonwebtoken.sign({ id }, secret);
     const response = await request(app)
       .get(`/user/${id}`)
-      .set('Authorization', `bearer ${token}`);
+      .set('Authorization', `Bearer ${token}`);
     expect(response.body).toEqual(expected);
   });
 });

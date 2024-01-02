@@ -23,7 +23,9 @@ export const loginRequestHandler = async (req: Request, res: Response) => {
   )
     throw retrievedUser;
   const { id } = retrievedUser;
-  const token = jsonwebtoken.sign(id, 'youllneverguess', { expiresIn: 3600 });
+  const token = jsonwebtoken.sign({ id }, 'youllneverguess', {
+    expiresIn: 3600,
+  });
   const response: LoginResponse = { token };
   res.send(response);
 };

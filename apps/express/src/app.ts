@@ -12,6 +12,8 @@ connect();
 
 //! define list of addresses that can request stuff to the server
 app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
   res.send({ message: `Hello API` });
