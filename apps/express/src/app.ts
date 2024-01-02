@@ -5,6 +5,7 @@ import { corsOptions } from './middleware/cors/corsMiddleWare';
 import { serverError } from './middleware/errors/errors';
 import { authRouter } from './routes/auth/authRoutes';
 import { userRouter } from './routes/user/userRoutes';
+import cookieParser from 'cookie-parser';
 
 export const app = express();
 
@@ -14,6 +15,7 @@ connect();
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.send({ message: `Hello API` });

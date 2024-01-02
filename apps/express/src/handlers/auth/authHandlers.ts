@@ -27,6 +27,7 @@ export const loginRequestHandler = async (req: Request, res: Response) => {
     expiresIn: 3600,
   });
   const response: LoginResponse = { token };
+  res.setHeader('Set-Cookie', `franco-demo-cookie=${token}; HttpOnly;`);
   res.send(response);
 };
 

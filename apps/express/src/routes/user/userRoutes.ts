@@ -1,19 +1,19 @@
 import cors from 'cors';
 import express from 'express';
-import { userGetRequestHandler } from '../../handlers/user/userHandlers';
-import { corsOptions } from '../../middleware/cors/corsMiddleWare';
 import passport from 'passport';
-import { strategy } from '../../middleware/auth/passport/JWTstrategy';
+import { userGetRequestHandler } from '../../handlers/user/userHandlers';
+import { strategy } from '../../middleware/auth/passport/CookieStrategy';
+import { corsOptions } from '../../middleware/cors/corsMiddleWare';
 
 const userRouter = express.Router();
 
-passport.authenticate('jwt', { session: false });
+passport.authenticate('cookie', { session: false });
 passport.use(strategy);
 
 userRouter.get(
   '/:id',
   cors(corsOptions),
-  passport.authenticate('jwt', { session: false }),
+  passport.authenticate('cookie', { session: false }),
   userGetRequestHandler
 );
 

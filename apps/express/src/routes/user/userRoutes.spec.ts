@@ -1,3 +1,4 @@
+import jsonwebtoken from 'jsonwebtoken';
 import request from 'supertest';
 import { app } from '../../app';
 import {
@@ -6,7 +7,6 @@ import {
   populateDb,
   teardownDb,
 } from '../../database/testSetup/utils';
-import jsonwebtoken from 'jsonwebtoken';
 
 beforeAll(async () => await populateDb());
 afterAll(async () => await teardownDb());
@@ -22,7 +22,7 @@ describe.each([
     const token = jsonwebtoken.sign({ id: defaultUserId }, secret);
     const response = await request(app)
       .get(`/user/${defaultUserId}`)
-      .set('Authorization', `Bearer ${token}`);
+      .set('Cookie', [`franco-demo-cookie=${token}`]);
     expect(response.body).toEqual(expected);
   });
 });
