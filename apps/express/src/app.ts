@@ -11,11 +11,25 @@ export const app = express();
 
 connect();
 
-//! define list of addresses that can request stuff to the server
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
+
+//! define list of addresses that can request stuff to the server
+app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,content-type'
+  );
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 app.get('/', (req, res) => {
   res.send({ message: `Hello API` });

@@ -8,11 +8,15 @@ import {
   UserRetrieveError,
   fnOrAuthError,
 } from '@demo/shared-errors';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import { findUserViaLogin } from '../../database/adapters/user/userAdapters';
 
-export const loginRequestHandler = async (req: Request, res: Response) => {
+export const loginRequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { username, password }: LoginRequest = req.body;
   const retrievedUser = await fnOrAuthError(() =>
     findUserViaLogin(username, password)
@@ -20,8 +24,10 @@ export const loginRequestHandler = async (req: Request, res: Response) => {
   if (
     retrievedUser instanceof UserRetrieveError ||
     retrievedUser instanceof AuthError
-  )
-    throw retrievedUser;
+  ) {
+    next(retrievedUser);
+    return;
+  }
   const { id } = retrievedUser;
   const token = jsonwebtoken.sign({ id }, 'youllneverguess', {
     expiresIn: 3600,

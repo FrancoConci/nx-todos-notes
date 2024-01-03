@@ -24,7 +24,7 @@ export const findUserViaLogin = async (username: string, password: string) => {
   const query = () => userModel.findOne({ username, password });
   const user = await fnOrUserRetrieveError(query);
   if (!isUser(user)) {
-    throw new UserRetrieveError('no user with this username, password');
+    return new UserRetrieveError('no user with this username, password');
   }
   return user;
 };
