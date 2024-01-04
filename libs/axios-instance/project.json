@@ -1,0 +1,33 @@
+{
+  "name": "axios-instance",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/axios-instance/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/axios-instance",
+        "main": "libs/axios-instance/src/index.ts",
+        "tsConfig": "libs/axios-instance/tsconfig.lib.json",
+        "assets": ["libs/axios-instance/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/axios-instance/package.json"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/axios-instance/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
