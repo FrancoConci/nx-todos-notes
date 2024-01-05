@@ -6,6 +6,7 @@
   --contrast: #e0e0e0;
   --secondary-main: #64d6e7;
   --secondary-dark: #3dafc0;
+  --secondary-saturated: #00ddff;
   --alert-main: #d9de78;
   --danger-main: #e68d9e;
 
@@ -14,6 +15,12 @@
   --spacing8: 8px;
   --spacing16: 16px;
   --spacing32: 32px;
+
+  --caption: 14px;
+  --text: 20px;
+  --textTitle: 32px;
+  --pageTitle: 48px;
+  --heroText: 72px;
 }
 
 [theme='light'] {
