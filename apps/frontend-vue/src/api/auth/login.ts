@@ -7,6 +7,5 @@ export const login =
     const response = await axiosInstance
       .post('/auth/login', { username, password })
       .catch((error) => console.log(error));
-    console.log('response', response);
     return response;
   };

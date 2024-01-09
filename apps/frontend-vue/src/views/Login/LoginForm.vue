@@ -11,13 +11,18 @@ const axiosInstance = inject<AxiosInstance>('axiosInstance');
 const loginWithAxios = login(axiosInstance);
 </script>
 <template>
-  <form @submit.prevent="() => loginWithAxios(username, password)">
+  <form
+    data-testid="login-form"
+    @submit.prevent="() => loginWithAxios(username, password)"
+  >
     <InputContainer
+      data-testid="login-form-username"
       :inputConfig="usernameConfig"
       label="User name"
       v-model:value="username"
     />
     <InputContainer
+      data-testid="login-form-password"
       :inputConfig="passwordConfig"
       label="Password"
       v-model:value="password"
