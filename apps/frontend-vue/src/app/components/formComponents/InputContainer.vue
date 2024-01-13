@@ -7,6 +7,7 @@ const { inputConfig, label } = defineProps<{
 }>();
 const { name } = inputConfig;
 const id = `input-${name}`;
+const value = defineModel('value');
 </script>
 <template>
   <div :class="$style.container">
@@ -20,6 +21,7 @@ const id = `input-${name}`;
       :data-testid="`form-component-input-element-${name}`"
       :id="id"
       :inputConfig="inputConfig"
+      v-model:value="value"
     />
     <span
       :data-testid="`form-component-error-element-${name}`"

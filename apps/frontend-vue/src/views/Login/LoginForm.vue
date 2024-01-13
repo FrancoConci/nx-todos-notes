@@ -13,7 +13,16 @@ const loginWithAxios = login(axiosInstance);
 <template>
   <form
     data-testid="login-form"
-    @submit.prevent="() => loginWithAxios(username, password)"
+    @keydown.enter="
+      () => {
+        loginWithAxios(username, password);
+      }
+    "
+    @submit.prevent="
+      () => {
+        loginWithAxios(username, password);
+      }
+    "
   >
     <InputContainer
       data-testid="login-form-username"
@@ -27,5 +36,6 @@ const loginWithAxios = login(axiosInstance);
       label="Password"
       v-model:value="password"
     />
+    and the password is {{ password }}
   </form>
 </template>
