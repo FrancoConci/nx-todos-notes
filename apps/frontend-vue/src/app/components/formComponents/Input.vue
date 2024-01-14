@@ -20,7 +20,23 @@ const value = defineModel('value');
 </script>
 <template>
   <input
-    :class="$style.input"
+    :class="`bg-light-primary-main dark:bg-dark-primary-main
+    text-light-contrast dark:text-dark-contrast
+    placeholder:italic placeholder-light-contrast dark:placeholder-dark-contrast
+    border border-solid p-1 rounded-md
+    border-light-secondary-main dark:border-dark-secondary-main
+    disabled:border-light-secondary-dark disabled:dark:border-dark-secondary-dark
+    read-only:border-light-secondary-dark read-only:dark:border-dark-secondary-dark
+    disabled:cursor-not-allowed
+    read-only: cursor-default
+    focus:outline-light-secondary-main dark:focus:outline-dark-secondary-main
+    dark:autofill:bg-dark-secondary-dark
+    autofill:shadow-light-color dark:autofill:shadow-dark-color
+    autofill:!text-dark-danger-main
+    focus-visible:outline-light-secondary-main dark:focus-visible:outline-dark-secondary-main
+    shadow-md disabled:shadow-none read-only:shadow-none
+    shadow-light-contrast-dark dark:shadow-dark-primary-dark
+    w-full h-inputHeight`"
     :data-testid="`input-${name}`"
     v-model="value"
     :name="name"
@@ -37,35 +53,28 @@ const value = defineModel('value');
     :required="required"
   />
 </template>
-<style module>
-@value centered from '../../../styles.css';
-
-.input {
-  composes: centered;
-  justify-content: left;
-  min-height: 46px;
-  width: clamp(256px, 40vw, 800px);
-  border: solid 1px var(--secondary-main);
-  border-radius: var(--spacing4);
-  background-color: var(--primary-main);
-  box-shadow: -4px 4px 4px var(--primary-dark);
-  padding: 0px var(--spacing8);
-  color: var(--contrast);
+<style>
+html.dark input:-webkit-autofill,
+html.dark input:-webkit-autofill:hover,
+html.dark input:-webkit-autofill:focus,
+html.dark textarea:-webkit-autofill,
+html.dark textarea:-webkit-autofill:hover,
+html.dark textarea:-webkit-autofill:focus,
+html.dark select:-webkit-autofill,
+html.dark select:-webkit-autofill:hover,
+html.dark select:-webkit-autofill:focus {
+  -webkit-text-fill-color: theme(colors.dark-contrast);
 }
 
-.input:focus-visible {
-  border-color: var(--secondary-saturated);
-  border-width: 2px;
-  outline: none;
-}
-
-.input::placeholder {
-  color: var(--contrast-light);
-}
-
-.input:disabled,
-.input:read-only {
-  box-shadow: none;
-  border-color: var(--secondary-dark);
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: theme(colors.light-contrast);
 }
 </style>

@@ -9,20 +9,14 @@ const username = ref('');
 
 const axiosInstance = inject<AxiosInstance>('axiosInstance');
 const loginWithAxios = login(axiosInstance);
+const onSubmit = () => loginWithAxios(username.value, password.value);
 </script>
 <template>
   <form
     data-testid="login-form"
-    @keydown.enter="
-      () => {
-        loginWithAxios(username, password);
-      }
-    "
-    @submit.prevent="
-      () => {
-        loginWithAxios(username, password);
-      }
-    "
+    @keydown.enter="onSubmit"
+    @submit.prevent="onSubmit"
+    class="flex flex-1 flex-col self-center justify-center items-center p-spacing16 md:w-[50%] xl:w-[800px]"
   >
     <InputContainer
       data-testid="login-form-username"
@@ -36,6 +30,5 @@ const loginWithAxios = login(axiosInstance);
       label="Password"
       v-model:value="password"
     />
-    and the password is {{ password }}
   </form>
 </template>

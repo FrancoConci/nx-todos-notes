@@ -10,10 +10,10 @@ const id = `input-${name}`;
 const value = defineModel('value');
 </script>
 <template>
-  <div :class="$style.container">
+  <div class="flex flex-col items-start justify-center">
     <label
       :data-testid="`form-component-label-element-${name}`"
-      :class="$style.label"
+      class="text-sm text-light-secondary-main dark:text-dark-secondary-main"
       :for="id"
       >{{ label }}</label
     >
@@ -25,28 +25,10 @@ const value = defineModel('value');
     />
     <span
       :data-testid="`form-component-error-element-${name}`"
-      :class="$style.error"
+      class="text-sm text-light-danger-main dark:text-dark-danger-main"
       :for="id"
     >
       {{ label }}
     </span>
   </div>
 </template>
-<style module>
-@value centered from '../../../styles.css';
-
-.container {
-  composes: centered;
-  flex-direction: column;
-}
-
-.label {
-  align-self: start;
-  font-size: var(--caption);
-}
-
-.error {
-  composes: label;
-  color: var(--danger-main);
-}
-</style>

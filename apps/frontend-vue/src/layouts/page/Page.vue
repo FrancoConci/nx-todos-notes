@@ -1,40 +1,26 @@
 <script setup lang="ts"></script>
 <template>
-  <div data-testid="page-container" :class="$style.container">
-    <header data-testid="page-header" :class="$style.header">
+  <div
+    data-testid="page-container"
+    class="flex flex-1 flex-col max-h-screen w-full align-middle justify-center"
+  >
+    <header
+      data-testid="page-header"
+      class="flex-row align-middle justify-center w-full h-spacing-32"
+    >
       <slot name="header">header</slot>
     </header>
-    <main data-testid="page-main" :class="$style.main">
+    <main
+      data-testid="page-main"
+      class="flex flex-1 flex-col align-middle justify-center h-full"
+    >
       <slot>content</slot>
     </main>
-    <footer data-testid="page-footer" :class="$style.footer">
+    <footer
+      data-testid="page-footer"
+      class="flex-row align-middle justify-center h-spacing-32"
+    >
       <slot name="footer">footer</slot>
     </footer>
   </div>
 </template>
-
-<style module>
-@value centered from '../../styles.css';
-
-.container {
-  composes: centered;
-  height: 100vh;
-  width: 100vw;
-  flex-direction: column;
-}
-
-.header {
-  composes: centered;
-  max-height: 32px;
-  width: 100%;
-}
-.main {
-  composes: centered;
-  width: 100%;
-}
-.footer {
-  composes: centered;
-  max-height: 32px;
-  width: 100%;
-}
-</style>
