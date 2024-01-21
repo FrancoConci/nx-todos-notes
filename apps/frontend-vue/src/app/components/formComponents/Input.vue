@@ -23,12 +23,11 @@ const value = defineModel('value');
     :class="`bg-light-primary-main dark:bg-dark-primary-main
     text-light-contrast dark:text-dark-contrast
     placeholder:italic placeholder-light-contrast dark:placeholder-dark-contrast
-    border border-solid p-1 rounded-md
+    box-border border border-solid p-1 rounded-md
     border-light-secondary-main dark:border-dark-secondary-main
     disabled:border-light-secondary-dark disabled:dark:border-dark-secondary-dark
     read-only:border-light-secondary-dark read-only:dark:border-dark-secondary-dark
-    disabled:cursor-not-allowed
-    read-only: cursor-default
+    cursor-text disabled:cursor-not-allowed
     focus:outline-light-secondary-main dark:focus:outline-dark-secondary-main
     dark:autofill:bg-dark-secondary-dark
     autofill:shadow-light-color dark:autofill:shadow-dark-color
@@ -36,7 +35,8 @@ const value = defineModel('value');
     focus-visible:outline-light-secondary-main dark:focus-visible:outline-dark-secondary-main
     shadow-md disabled:shadow-none read-only:shadow-none
     shadow-light-contrast-dark dark:shadow-dark-primary-dark
-    w-full h-inputHeight`"
+    hover:scale-[1.025]
+    w-full md:w-[265px] h-inputHeight`"
     :data-testid="`input-${name}`"
     v-model="value"
     :name="name"
