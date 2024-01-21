@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { AxiosInstance } from 'axios';
-import { inject, ref } from 'vue';
-import { login } from '../../api/auth/login';
+import { ref } from 'vue';
 import InputContainer from '../../app/components/formComponents/InputContainer.vue';
 import { passwordConfig, usernameConfig } from './constants';
+import { useHandleLogin } from './useHandleLogin';
+import { useLoginValidation } from './useLoginValidation';
+
 const password = ref('');
 const username = ref('');
+const { loginRequest, loading, response, error } = useHandleLogin();
+const { usernameErr, passwordErr } = useLoginValidation(username, password);
 
-const axiosInstance = inject<AxiosInstance>('axiosInstance');
-const loginWithAxios = login(axiosInstance);
-const onSubmit = () => loginWithAxios(username.value, password.value);
+const onSubmit = () => loginRequest(username.value, password.value);
 </script>
 <template>
   <form
@@ -20,14 +21,16 @@ const onSubmit = () => loginWithAxios(username.value, password.value);
   >
     <InputContainer
       data-testid="login-form-username"
-      :inputConfig="usernameConfig"
+      :inputConfig="{ ...usernameConfig, disabled: loading }"
       label="User name"
+      :error="usernameErr"
       v-model:value="username"
     />
     <InputContainer
       data-testid="login-form-password"
-      :inputConfig="passwordConfig"
+      :inputConfig="{ ...passwordConfig, disabled: loading }"
       label="Password"
+      :error="passwordErr"
       v-model:value="password"
     />
   </form>

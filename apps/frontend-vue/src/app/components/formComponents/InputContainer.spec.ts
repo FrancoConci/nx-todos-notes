@@ -26,7 +26,7 @@ describe('InputContainer', () => {
     };
 
     const wrapper = mount(InputContainer, {
-      props: { inputConfig, label: 'initial' },
+      props: { inputConfig, label: 'initial', error: '' },
     });
 
     const label = wrapper.find(labelSelector(inputConfig.name));
