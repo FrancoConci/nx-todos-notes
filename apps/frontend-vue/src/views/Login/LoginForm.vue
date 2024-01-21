@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import InputContainer from '../../app/components/formComponents/InputContainer.vue';
+import type { AxiosInstance } from 'axios';
+import { inject, ref } from 'vue';
 import Button from '../../app/components/formComponents/Button.vue';
+import InputContainer from '../../app/components/formComponents/InputContainer.vue';
 import { passwordConfig, usernameConfig } from './constants';
 import { useHandleLogin } from './useHandleLogin';
-import { useLoginValidation } from './useLoginValidation';
 import { useHandleSignUp } from './useHandleSignUp';
+import { useLoginValidation } from './useLoginValidation';
 
+const axiosInstance = inject<AxiosInstance>('axiosInstance');
 const password = ref('');
 const username = ref('');
 const {
@@ -14,13 +16,13 @@ const {
   loading: loginLoading,
   response: loginResponse,
   error: loginError,
-} = useHandleLogin();
+} = useHandleLogin(axiosInstance);
 const {
   signupRequest,
   loading: signupLoading,
   response: signupResponse,
   error: signupError,
-} = useHandleSignUp();
+} = useHandleSignUp(axiosInstance);
 const { usernameErr, passwordErr } = useLoginValidation(username, password);
 
 const onSubmit = () => loginRequest(username.value, password.value);

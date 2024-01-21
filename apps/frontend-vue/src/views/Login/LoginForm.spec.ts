@@ -14,7 +14,9 @@ describe('LoginForm', () => {
   });
 
   it('shows a form with username and password inputs and login and signup buttons', () => {
-    const wrapper = mount(LoginForm);
+    const wrapper = mount(LoginForm, {
+      global: { provide: { axiosInstance: {} } },
+    });
 
     const form = wrapper.find(formSelector);
     const username = wrapper.find(usernameSelector);

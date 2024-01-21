@@ -1,3 +1,4 @@
+import type { AxiosInstance } from 'axios';
 import { useHandleSignUp } from './useHandleSignUp';
 
 const delay =
@@ -11,16 +12,14 @@ const delay =
     );
 
 const mocks = vi.hoisted(() => ({
-  returnValue: () =>
-    new Promise<{ data: string }>((res) => {
-      setTimeout(() => {
-        return res({ data: 'value' });
-      }, 10);
-    }),
-}));
-
-vi.mock('@demo/axios-instance', () => ({
-  getAxiosInstance: () => ({ request: mocks.returnValue }),
+  mockAxiosInstance: {
+    request: () =>
+      new Promise<{ data: string }>((res) => {
+        setTimeout(() => {
+          return res({ data: 'value' });
+        }, 10);
+      }),
+  } as unknown as AxiosInstance,
 }));
 
 describe.each([
@@ -29,7 +28,9 @@ describe.each([
   },
 ])('useHandleLogin', ({ description }) => {
   it(`${description}`, async () => {
-    const { signupRequest, loading, error, response } = useHandleSignUp();
+    const { signupRequest, loading, error, response } = useHandleSignUp(
+      mocks.mockAxiosInstance
+    );
     expect(signupRequest).toBeDefined();
     expect(loading).toBeDefined();
     expect(error).toBeDefined();
@@ -72,8 +73,10 @@ describe.each([
       vi.useRealTimers();
     });
     it(`${description}`, async () => {
-      mocks.returnValue = newReturnValue;
-      const { signupRequest, loading, error, response } = useHandleSignUp();
+      mocks.mockAxiosInstance = { request: newReturnValue };
+      const { signupRequest, loading, error, response } = useHandleSignUp(
+        mocks.mockAxiosInstance
+      );
 
       expect(loading.value).toBe(false);
       expect(response.value).toBeNull();
@@ -114,7 +117,9 @@ describe.each([
     vi.useRealTimers();
   });
   it(`${description}`, async () => {
-    const { signupRequest, loading, error, response } = useHandleSignUp();
+    const { signupRequest, loading, error, response } = useHandleSignUp(
+      mocks.mockAxiosInstance
+    );
 
     expect(loading.value).toBe(false);
     expect(response.value).toBeNull();

@@ -1,7 +1,9 @@
+import type { AxiosInstance } from 'axios';
 import { useHandleRequest } from '../../api/composables/useHandleRequest';
 
-export const useHandleLogin = () => {
-  const { handleRequest, loading, error, response } = useHandleRequest();
+export const useHandleLogin = (axiosInstance?: AxiosInstance) => {
+  const { handleRequest, loading, error, response } =
+    useHandleRequest(axiosInstance);
 
   const loginRequest = (username: string, password: string) => {
     if (username && password)

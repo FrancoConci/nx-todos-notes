@@ -1,7 +1,7 @@
-import { getAxiosInstance } from '@demo/axios-instance';
-import { ref, type UnwrapRef } from 'vue';
+import type { AxiosInstance } from 'axios';
+import { inject, ref, type UnwrapRef } from 'vue';
 
-export const useHandleRequest = <R, E>() => {
+export const useHandleRequest = <R, E>(axiosInstance?: AxiosInstance) => {
   const loading = ref(false);
   const error = ref<null | E>(null);
   const response = ref<null | R>(null);
@@ -23,7 +23,7 @@ export const useHandleRequest = <R, E>() => {
     headers?: Record<string, string>,
     params?: Record<string, string>
   ): Promise<void> => {
-    const axiosInstance = getAxiosInstance(import.meta.env.VITE_BASE_URL);
+    if (!axiosInstance) return;
     updateState(true, null, null);
     axiosInstance
       .request<any, { data: UnwrapRef<R> }>({

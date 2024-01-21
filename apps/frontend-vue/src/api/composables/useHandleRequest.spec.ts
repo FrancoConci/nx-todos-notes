@@ -1,3 +1,4 @@
+import type { AxiosInstance } from 'axios';
 import { useHandleRequest } from './useHandleRequest';
 
 const delay =
@@ -11,16 +12,14 @@ const delay =
     );
 
 const mocks = vi.hoisted(() => ({
-  returnValue: () =>
-    new Promise<{ data: string }>((res) => {
-      setTimeout(() => {
-        return res({ data: 'value' });
-      }, 10);
-    }),
-}));
-
-vi.mock('@demo/axios-instance', () => ({
-  getAxiosInstance: () => ({ request: mocks.returnValue }),
+  mockAxiosInstance: {
+    request: () =>
+      new Promise<{ data: string }>((res) => {
+        setTimeout(() => {
+          return res({ data: 'value' });
+        }, 10);
+      }),
+  } as unknown as AxiosInstance,
 }));
 
 describe.each([
@@ -29,7 +28,9 @@ describe.each([
   },
 ])('useHandleRequest', ({ description }) => {
   it(`${description}`, async () => {
-    const { handleRequest, loading, error, response } = useHandleRequest();
+    const { handleRequest, loading, error, response } = useHandleRequest(
+      mocks.mockAxiosInstance
+    );
     expect(handleRequest).toBeDefined();
     expect(loading).toBeDefined();
     expect(error).toBeDefined();
@@ -61,8 +62,10 @@ describe.each([
       vi.useRealTimers();
     });
     it(`${description}`, async () => {
-      mocks.returnValue = newReturnValue;
-      const { handleRequest, loading, error, response } = useHandleRequest();
+      mocks.mockAxiosInstance = { request: newReturnValue };
+      const { handleRequest, loading, error, response } = useHandleRequest(
+        mocks.mockAxiosInstance
+      );
 
       expect(loading.value).toBe(false);
       expect(response.value).toBeNull();
