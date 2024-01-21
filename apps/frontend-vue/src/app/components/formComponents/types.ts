@@ -12,3 +12,12 @@ export type TInputProperties = {
   readonly?: boolean;
   required?: boolean;
 };
+
+export type TButtonProps = {
+  name: string;
+  value?: string;
+  autofocus?: boolean;
+  disabled?: boolean;
+  type?: 'submit' | 'reset' | 'button';
+  color?: 'secondary' | 'alert' | 'danger';
+};
