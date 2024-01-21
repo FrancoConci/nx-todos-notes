@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import InputContainer from '../../app/components/formComponents/InputContainer.vue';
+import Button from '../../app/components/formComponents/Button.vue';
 import { passwordConfig, usernameConfig } from './constants';
 import { useHandleLogin } from './useHandleLogin';
 import { useLoginValidation } from './useLoginValidation';
@@ -33,5 +34,20 @@ const onSubmit = () => loginRequest(username.value, password.value);
       :error="passwordErr"
       v-model:value="password"
     />
+    <div class="flex flex-col w-full">
+      <Button
+        data-testid="login-button"
+        color="secondary"
+        name="Let's go!"
+        @click.prevent="loginRequest(username, password)"
+      ></Button>
+      <Button
+        data-testid="signup-button"
+        class="mt-5"
+        color="secondary"
+        name="Sign me Up!"
+        @click.prevent="() => console.log('click')"
+      ></Button>
+    </div>
   </form>
 </template>

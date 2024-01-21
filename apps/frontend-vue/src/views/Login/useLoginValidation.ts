@@ -8,7 +8,6 @@ export const useLoginValidation = (
   const passwordErr = ref('');
 
   watch(username, () => {
-    console.log('username.value', username.value);
     usernameErr.value = username.value ? '' : 'i am an error';
   });
   watch(password, () => {
